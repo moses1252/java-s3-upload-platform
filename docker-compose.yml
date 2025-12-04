@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: postgres-s3-upload
+    image: postgres:15
+    environment:
+      POSTGRES_USER: moses
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: s3upload
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:
